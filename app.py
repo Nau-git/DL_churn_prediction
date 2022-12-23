@@ -2,8 +2,8 @@ import streamlit as st
 import pickle, sklearn
 import numpy as np
 import pandas as pd
-import tensorflow as tf
-
+# import tensorflow as tf
+from tensorflow.keras.models import load_model
 
 st.set_page_config(
     page_title="Customer Churn Prediction",
@@ -33,7 +33,8 @@ with open('pca18.pkl', 'rb') as f:
 def teachable_machine_classification(new_data, weights_file):
     # Load the model
     #model = tf.saved_model.load(weights_file)
-    model = tf.keras.models.load_model(weights_file)
+#     model = tf.keras.models.load_model(weights_file)
+    model = load_model(weights_file)
     
     num_columns = new_data.select_dtypes(include=np.number).columns.tolist()
     cat_columns = new_data.select_dtypes(include=['object']).columns.tolist()
